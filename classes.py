@@ -45,31 +45,40 @@ class SurveyArray2:
             self.cs.append(float(survey.cs))
             self.vox.append(float(survey.vox))
         recent = sum(self.pp[0:5]) / float(5)
-        old = sum(self.pp[5:21]) / float(15)
-        estimate = round((recent * 0.7) + (old * 0.3), 2)
-        adjustedestimate = round((20.75 / 19.7) * estimate, 2)
-        self.pp = str(adjustedestimate) + "%"
+        medium = sum(self.pp[5:11]) / float(5)
+        old = sum(self.pp[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
+        adjustedestimate = (20.75 / 19.7) * estimate
+        correctedestimate = round(adjustedestimate * (13.1 / 14.15), 2)
+        self.pp = str(correctedestimate) + "%"
 
         recent = sum(self.psoe[0:5]) / float(5)
-        old = sum(self.psoe[5:21]) / float(15)
-        estimate = (recent * 0.7) + (old * 0.3)
+        medium = sum(self.psoe[5:11]) / float(5)
+        old = sum(self.psoe[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
         adjustedestimate = round((27.95 / 30.6) * estimate, 2)
-        self.psoe = str(adjustedestimate) + "%"
+        correctedestimate = round(adjustedestimate * (22.6 / 22.0), 2)
+        self.psoe = str(correctedestimate) + "%"
 
         recent = sum(self.up[0:5]) / float(5)
-        old = sum(self.up[5:21]) / float(15)
-        estimate = round((recent * 0.7) + (old * 0.3), 2)
+        medium = sum(self.up[5:11]) / float(5)
+        old = sum(self.up[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
         adjustedestimate = round((16.18 / 18.4) * estimate, 2)
-        self.up = str(adjustedestimate) + "%"
+        correctedestimate = round(adjustedestimate * (22.6 / 19.87), 2)
+        self.up = str(correctedestimate) + "%"
 
         recent = sum(self.cs[0:5]) / float(5)
-        old = sum(self.cs[5:21]) / float(15)
-        estimate = round((recent * 0.7) + (old * 0.3), 2)
+        medium = sum(self.cs[5:11]) / float(5)
+        old = sum(self.cs[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
         adjustedestimate = round((18.27 / 17.6) * estimate, 2)
-        self.cs = str(adjustedestimate) + "%"
+        correctedestimate = round(adjustedestimate * (13.1 / 14.15), 2)
+        self.cs = str(correctedestimate) + "%"
 
         recent = sum(self.vox[0:5]) / float(5)
         old = sum(self.vox[5:21]) / float(15)
         estimate = round((recent * 0.7) + (old * 0.3), 2)
         adjustedestimate = round((10.97 / 10.2) * estimate, 2)
-        self.vox = str(adjustedestimate) + "%"
+        correctedestimate = round(adjustedestimate * (22.6 / 22.0), 2)
+        self.vox = str(correctedestimate) + "%"
