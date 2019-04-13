@@ -36,7 +36,7 @@ class Results:
         recent = sum(self.pp[0:5]) / float(5)
         medium = sum(self.pp[5:11]) / float(5)
         old = sum(self.pp[11:21]) / float(10)
-        estimate = (recent * 0.45) + (medium * 0.25) + (old * 0.1)
+        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.6 * pp15Multi) + (0.4 * pp18Multi))
         self.pp = adjustedestimate
         self.ppstring = str(round(self.pp, 2)) + "%"
