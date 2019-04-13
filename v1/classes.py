@@ -1,0 +1,134 @@
+import statistics
+class Survey:
+    def __init__(self, row):
+        self.surveyor = row[0].text
+        self.date = row[1].text
+        self.pp = row[4].text.rstrip()
+        self.psoe = row[5][0].text.rstrip()
+        self.up = row[6].text.rstrip()
+        self.cs = row[7].text.rstrip()
+        self.vox = row[14].text.rstrip()
+
+class SurveyArray:
+    def __init__(self, array):
+        self.array = array
+        self.pp = []
+        self.psoe = []
+        self.up = []
+        self.cs = []
+        self.vox = []
+        for survey in self.array:
+            self.pp.append(float(survey.pp))
+            self.psoe.append(float(survey.psoe))
+            self.up.append(float(survey.up))
+            self.cs.append(float(survey.cs))
+            self.vox.append(float(survey.vox))
+        self.ppmean = str(round(statistics.mean(self.pp), 2)) + "%"
+        self.psoemean = str(round(statistics.mean(self.psoe), 2)) + "%"
+        self.upmean = str(round(statistics.mean(self.up), 2)) + "%"
+        self.csmean = str(round(statistics.mean(self.cs), 2)) + "%"
+        self.voxmean = str(round(statistics.mean(self.vox), 2)) + "%"
+
+class SurveyArray2:
+    def __init__(self, array):
+        self.array = array
+        self.pp = []
+        self.psoe = []
+        self.up = []
+        self.cs = []
+        self.vox = []
+        self.parties = [self.pp, self.psoe, self.up, self.cs, self.vox]
+        for survey in self.array:
+            self.pp.append(float(survey.pp))
+            self.psoe.append(float(survey.psoe))
+            self.up.append(float(survey.up))
+            self.cs.append(float(survey.cs))
+            self.vox.append(float(survey.vox))
+        recent = sum(self.pp[0:5]) / float(5)
+        medium = sum(self.pp[5:11]) / float(5)
+        old = sum(self.pp[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
+        adjustedestimate = (20.75 / 19.7) * estimate
+        correctedestimate = round(adjustedestimate * (13.1 / 14.15), 2)
+        self.pp = str(correctedestimate) + "%"
+
+        recent = sum(self.psoe[0:5]) / float(5)
+        medium = sum(self.psoe[5:11]) / float(5)
+        old = sum(self.psoe[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
+        adjustedestimate = round((27.95 / 30.6) * estimate, 2)
+        correctedestimate = round(adjustedestimate * (22.6 / 22.0), 2)
+        self.psoe = str(correctedestimate) + "%"
+
+        recent = sum(self.up[0:5]) / float(5)
+        medium = sum(self.up[5:11]) / float(5)
+        old = sum(self.up[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
+        adjustedestimate = round((16.18 / 18.4) * estimate, 2)
+        correctedestimate = round(adjustedestimate * (22.6 / 19.87), 2)
+        self.up = str(correctedestimate) + "%"
+
+        recent = sum(self.cs[0:5]) / float(5)
+        medium = sum(self.cs[5:11]) / float(5)
+        old = sum(self.cs[11:21]) / float(10)
+        estimate = round((recent * 0.5) + (medium * 0.3) + (old * 0.2), 2)
+        adjustedestimate = round((18.27 / 17.6) * estimate, 2)
+        correctedestimate = round(adjustedestimate * (13.1 / 14.15), 2)
+        self.cs = str(correctedestimate) + "%"
+
+        recent = sum(self.vox[0:5]) / float(5)
+        old = sum(self.vox[5:21]) / float(15)
+        estimate = round((recent * 0.7) + (old * 0.3), 2)
+        adjustedestimate = round((10.97 / 10.2) * estimate, 2)
+        correctedestimate = round(adjustedestimate * (22.6 / 22.0), 2)
+        self.vox = str(correctedestimate) + "%"
+
+class SurveyArray3:
+    def __init__(self, array):
+        self.array = array
+        self.pp = []
+        self.psoe = []
+        self.up = []
+        self.cs = []
+        self.vox = []
+        self.parties = [self.pp, self.psoe, self.up, self.cs, self.vox]
+        for survey in self.array:
+            self.pp.append(float(survey.pp))
+            self.psoe.append(float(survey.psoe))
+            self.up.append(float(survey.up))
+            self.cs.append(float(survey.cs))
+            self.vox.append(float(survey.vox))
+        recent = sum(self.pp[0:5]) / float(5)
+        medium = sum(self.pp[5:11]) / float(5)
+        old = sum(self.pp[11:21]) / float(10)
+        estimate = (recent * 0.45) + (medium * 0.25) + (old * 0.1)
+        adjustedestimate = estimate * ((0.6 * (28.72 / 28.1)) + (0.4 * (20.7 / 19.7)))
+        self.pp = str(round(adjustedestimate, 2)) + "%"
+
+        recent = sum(self.psoe[0:5]) / float(5)
+        medium = sum(self.psoe[5:11]) / float(5)
+        old = sum(self.psoe[11:21]) / float(10)
+        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        adjustedestimate = estimate * ((0.6 * (22.01 / 23.9)) + (0.4 * (27.9 / 30.6)))
+        self.psoe = str(round(adjustedestimate, 2)) + "%"
+
+        recent = sum(self.up[0:5]) / float(5)
+        medium = sum(self.up[5:11]) / float(5)
+        old = sum(self.up[11:21]) / float(10)
+        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        adjustedestimate = estimate * ((0.6 * (20.66 / 15.3)) + (0.4 * (16.2 / 18.4)))
+        self.up = str(round(adjustedestimate, 2)) + "%"
+
+        recent = sum(self.cs[0:5]) / float(5)
+        medium = sum(self.cs[5:11]) / float(5)
+        old = sum(self.cs[11:21]) / float(10)
+        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        adjustedestimate = estimate * ((0.6 * (13.93 / 18.6)) + (0.4 * (18.3 / 17.6)))
+        self.cs = str(round(adjustedestimate, 2)) + "%"
+
+        recent = sum(self.vox[0:5]) / float(5)
+        medium = sum(self.vox[5:11]) / float(5)
+        old = sum(self.vox[11:21]) / float(10)
+        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        adjustedestimate = estimate * (11.0 / 10.2)
+        self.vox = str(round(adjustedestimate, 2)) + "%"
