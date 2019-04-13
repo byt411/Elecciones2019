@@ -89,7 +89,7 @@ class Province:
             self.up = self.upmulti * percentages[2]
             self.cs = self.csmulti * percentages[3]
             self.vox = self.voxmulti * percentages[4]
-            other = 100 - self.pp - self.psoe - self.up - self.cs - self.vox
+            other = 95 - self.pp - self.psoe - self.up - self.cs - self.vox
             self.other1 = other / 2
             self.other2 = other / 2
 
@@ -102,7 +102,7 @@ class Province:
 
             self.seatcount = 1
             self.seatlist = []
-            while self.seatcount < self.seats:
+            while self.seatcount - 1 < self.seats:
                 seatentry = ('PP', (self.pp / self.seatcount))
                 self.seatlist.append(seatentry)
                 seatentry = ('PSOE', (self.psoe / self.seatcount))
@@ -134,4 +134,4 @@ class Province:
                     self.voxseats += 1
                 elif seat[0] == 'Other1' or seat[0] == 'Other2':
                     self.otherseats += 1
-            print self.name + ' ' + str(self.ppseats) + ' ' + str(self.psoeseats) + ' ' + str(self.upseats) + ' ' + str(self.csseats) + ' ' + str(self.voxseats)
+        #    print self.name + ' ' + str(self.ppseats) + ' ' + str(self.psoeseats) + ' ' + str(self.upseats) + ' ' + str(self.csseats) + ' ' + str(self.voxseats)
