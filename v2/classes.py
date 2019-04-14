@@ -1,13 +1,11 @@
 import operator
 class Survey:
     def __init__(self, row):
-        self.surveyor = row[0].text
-        self.date = row[1].text
-        self.pp = row[4].text.rstrip()
-        self.psoe = row[5][0].text.rstrip()
-        self.up = row[6].text.rstrip()
-        self.cs = row[7].text.rstrip()
-        self.vox = row[14].text.rstrip()
+        self.pp = row[3].text.rstrip().replace(',', '.')
+        self.psoe = row[2].text.rstrip().replace(',', '.')
+        self.up = row[5].text.rstrip().replace(',', '.')
+        self.cs = row[4].text.rstrip().replace(',', '.')
+        self.vox = row[6].text.rstrip().replace(',', '.')
 
 pp15Multi = 28.72 / 28.1
 pp18Multi = 20.7 / 19.7
@@ -36,7 +34,7 @@ class Results:
             self.vox.append(float(survey.vox))
         recent = sum(self.pp[0:5]) / float(5)
         medium = sum(self.pp[5:11]) / float(5)
-        old = sum(self.pp[11:21]) / float(10)
+        old = sum(self.pp[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.6 * pp15Multi) + (0.4 * pp18Multi))
         self.pp = adjustedestimate
@@ -44,7 +42,7 @@ class Results:
 
         recent = sum(self.psoe[0:5]) / float(5)
         medium = sum(self.psoe[5:11]) / float(5)
-        old = sum(self.psoe[11:21]) / float(10)
+        old = sum(self.psoe[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.6 * psoe15Multi) + (0.4 * psoe18Multi))
         self.psoe = adjustedestimate
@@ -52,7 +50,7 @@ class Results:
 
         recent = sum(self.up[0:5]) / float(5)
         medium = sum(self.up[5:11]) / float(5)
-        old = sum(self.up[11:21]) / float(10)
+        old = sum(self.up[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.6 * up15Multi) + (0.4 * up18Multi))
         self.up = adjustedestimate
@@ -60,7 +58,7 @@ class Results:
 
         recent = sum(self.cs[0:5]) / float(5)
         medium = sum(self.cs[5:11]) / float(5)
-        old = sum(self.cs[11:21]) / float(10)
+        old = sum(self.cs[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.6 * cs15Multi) + (0.4 * cs18Multi))
         self.cs = adjustedestimate
@@ -68,7 +66,7 @@ class Results:
 
         recent = sum(self.vox[0:5]) / float(5)
         medium = sum(self.vox[5:11]) / float(5)
-        old = sum(self.vox[11:21]) / float(10)
+        old = sum(self.vox[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * voxMulti
         self.vox = adjustedestimate
@@ -90,8 +88,7 @@ class Province:
             self.cs = self.csmulti * percentages[3]
             self.vox = self.voxmulti * percentages[4]
             other = 95 - self.pp - self.psoe - self.up - self.cs - self.vox
-            self.other1 = other / 2
-            self.other2 = other / 2
+            self.other = other
 
             self.ppseats = 0
             self.psoeseats = 0
@@ -113,9 +110,7 @@ class Province:
                 self.seatlist.append(seatentry)
                 seatentry = ('Vox', (self.vox / self.seatcount))
                 self.seatlist.append(seatentry)
-                seatentry = ('Other1', (self.other1 / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('Other2', (self.other2 / self.seatcount))
+                seatentry = ('Other', (self.other / self.seatcount))
                 self.seatlist.append(seatentry)
                 self.seatcount += 1
             self.seatlist.sort( key = operator.itemgetter(1), reverse = True)
@@ -132,6 +127,6 @@ class Province:
                     self.csseats += 1
                 elif seat[0] == 'Vox':
                     self.voxseats += 1
-                elif seat[0] == 'Other1' or seat[0] == 'Other2':
+                elif seat[0] == 'Other':
                     self.otherseats += 1
-        #    print self.name + ' ' + str(self.ppseats) + ' ' + str(self.psoeseats) + ' ' + str(self.upseats) + ' ' + str(self.csseats) + ' ' + str(self.voxseats)
+            print self.name + ' ' + str(self.ppseats) + ' ' + str(self.psoeseats) + ' ' + str(self.upseats) + ' ' + str(self.csseats) + ' ' + str(self.voxseats)
