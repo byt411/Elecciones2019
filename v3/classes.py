@@ -15,7 +15,8 @@ up15Multi = 20.66 / 15.3
 up18Multi = 16.2 / 18.4
 cs15Multi = 13.93 / 18.6
 cs18Multi = 18.3 / 17.6
-voxMulti = 11.0 / 10.2
+voxMulti1 = 11.0 / 10.2
+voxMulti2 = 11.0 / 8.7
 
 class Results:
     def __init__(self, array):
@@ -36,7 +37,7 @@ class Results:
         medium = sum(self.pp[5:11]) / float(5)
         old = sum(self.pp[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
-        adjustedestimate = estimate * ((0.6 * pp15Multi) + (0.4 * pp18Multi))
+        adjustedestimate = estimate * ((0.55 * pp15Multi) + (0.45 * pp18Multi))
         self.pp = adjustedestimate
         self.ppstring = str(round(self.pp, 2)) + "%"
 
@@ -44,7 +45,7 @@ class Results:
         medium = sum(self.psoe[5:11]) / float(5)
         old = sum(self.psoe[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
-        adjustedestimate = estimate * ((0.6 * psoe15Multi) + (0.4 * psoe18Multi))
+        adjustedestimate = estimate * ((0.55 * psoe15Multi) + (0.45 * psoe18Multi))
         self.psoe = adjustedestimate
         self.psoestring = str(round(self.psoe, 2)) + "%"
 
@@ -52,7 +53,7 @@ class Results:
         medium = sum(self.up[5:11]) / float(5)
         old = sum(self.up[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
-        adjustedestimate = estimate * ((0.6 * up15Multi) + (0.4 * up18Multi))
+        adjustedestimate = estimate * ((0.55 * up15Multi) + (0.45 * up18Multi))
         self.up = adjustedestimate
         self.upstring = str(round(self.up, 2)) + "%"
 
@@ -60,7 +61,7 @@ class Results:
         medium = sum(self.cs[5:11]) / float(5)
         old = sum(self.cs[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
-        adjustedestimate = estimate * ((0.6 * cs15Multi) + (0.4 * cs18Multi))
+        adjustedestimate = estimate * ((0.55 * cs15Multi) + (0.45 * cs18Multi))
         self.cs = adjustedestimate
         self.csstring = str(round(self.cs, 2)) + "%"
 
@@ -68,7 +69,7 @@ class Results:
         medium = sum(self.vox[5:11]) / float(5)
         old = sum(self.vox[11:26]) / float(15)
         estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
-        adjustedestimate = estimate * voxMulti
+        adjustedestimate = estimate * ((0.55 * voxMulti1) + (0.45 * voxMulti2))
         self.vox = adjustedestimate
         self.voxstring = str(round(self.vox, 2)) + "%"
 
