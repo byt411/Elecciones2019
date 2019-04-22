@@ -18,6 +18,7 @@ upseats = 0
 csseats = 0
 voxseats = 0
 otherseats = 0
+navarraseats = 0
 for line in provincedata:
     splitLine = line.rstrip().split()
     newProvince = Province(splitLine, percentages)
@@ -27,15 +28,22 @@ for line in provincedata:
     csseats += newProvince.csseats
     voxseats += newProvince.voxseats
     otherseats += newProvince.otherseats
+    navarraseats += newProvince.navarraseats
+print '-----------------------'
+print "Partido Popular: " + str(pp) + "%"
+print "Partido Socialista Obrero Espanol: " + str(psoe) + "%"
+print "Unidas Podemos: " + str(up) + "%"
+print "Ciudadanos: " + str(cs) + "%"
+print "Vox: " + str(vox) + "%"
 print '-----------------------'
 print "Partido Popular: " + str(ppseats)
 print "Partido Socialista Obrero Espanol: " + str(psoeseats)
 print "Unidas Podemos: " + str(upseats)
 print "Ciudadanos: " + str(csseats)
 print "Vox: " + str(voxseats)
-print "Otros: " + str(otherseats)
+print "Otros: " + str(otherseats + navarraseats)
 print '-----------------------'
-print 'PP + Ciudadanos + Vox: ' + str(ppseats + csseats + voxseats)
+print 'PP + Ciudadanos + Vox: ' + str(ppseats + csseats + voxseats + navarraseats)
 print 'PSOE + Unidas Podemos: ' + str(psoeseats + upseats)
 print 'PSOE + Unidas Podemos + Otros: ' + str(psoeseats + upseats + otherseats)
 print 'PSOE + Ciudadanos: ' + str(psoeseats + csseats)

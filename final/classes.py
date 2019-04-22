@@ -88,15 +88,20 @@ class Province:
             self.psoemulti = float(line[3])
             self.upmulti = float(line[4])
             self.csmulti = float(line[5])
-            self.voxmulti = float((self.ppmulti + self.csmulti) / 2)
-
+            self.voxmulti = (self.ppmulti * 0.7) + (self.csmulti * 0.3)
+        #    self.voxmulti = (self.ppmulti + self.csmulti) / 2
             self.pp = self.ppmulti * percentages[0]
             self.psoe = self.psoemulti * percentages[1]
             self.up = self.upmulti * percentages[2]
             self.cs = self.csmulti * percentages[3]
             self.vox = self.voxmulti * percentages[4]
             other = 95 - self.pp - self.psoe - self.up - self.cs - self.vox
-            self.other = other
+            self.other1 = other
+            if self.name == "Navarra":
+                self.navarra = self.pp + self.cs
+                self.other1 = other / 2
+                self.other2 = other / 2
+
 
             self.ppseats = 0
             self.psoeseats = 0
@@ -104,22 +109,37 @@ class Province:
             self.csseats = 0
             self.voxseats = 0
             self.otherseats = 0
+            self.navarraseats = 0
 
             self.seatcount = 1
             self.seatlist = []
             while self.seatcount - 1 < self.seats:
-                seatentry = ('PP', (self.pp / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('PSOE', (self.psoe / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('UP', (self.up / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('Cs', (self.cs / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('Vox', (self.vox / self.seatcount))
-                self.seatlist.append(seatentry)
-                seatentry = ('Other', (self.other / self.seatcount))
-                self.seatlist.append(seatentry)
+                if self.name != "Navarra":
+                    seatentry = ('PP', (self.pp / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('PSOE', (self.psoe / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('UP', (self.up / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Cs', (self.cs / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Vox', (self.vox / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Other1', (self.other1 / self.seatcount))
+                    self.seatlist.append(seatentry)
+                else:
+                    seatentry = ('PSOE', (self.psoe / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('UP', (self.up / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Navarra', (self.navarra / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Vox', (self.vox / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Other1', (self.other1 / self.seatcount))
+                    self.seatlist.append(seatentry)
+                    seatentry = ('Other2', (self.other2 / self.seatcount))
+                    self.seatlist.append(seatentry)
                 self.seatcount += 1
             self.seatlist.sort( key = operator.itemgetter(1), reverse = True)
             self.seatlist = self.seatlist[0:self.seats]
@@ -135,6 +155,8 @@ class Province:
                     self.csseats += 1
                 elif seat[0] == 'Vox':
                     self.voxseats += 1
-                elif seat[0] == 'Other':
+                elif seat[0] == 'Other1' or seat[0] == 'Other2':
                     self.otherseats += 1
+                elif seat[0] == "Navarra":
+                    self.navarraseats += 1
             print self.name + ' ' + str(self.ppseats) + ' ' + str(self.psoeseats) + ' ' + str(self.upseats) + ' ' + str(self.csseats) + ' ' + str(self.voxseats) + ' ' + str(self.otherseats)

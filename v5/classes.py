@@ -1,11 +1,12 @@
 import operator
 class Survey:
     def __init__(self, row):
-        self.pp = row[3].text.rstrip().replace(',', '.')
-        self.psoe = row[2].text.rstrip().replace(',', '.')
-        self.up = row[5].text.rstrip().replace(',', '.')
-        self.cs = row[4].text.rstrip().replace(',', '.')
-        self.vox = row[6].text.rstrip().replace(',', '.')
+        self.pp = row[0].rstrip()
+        self.psoe = row[1].rstrip()
+        self.up = row[2].rstrip()
+        self.cs = row[3].rstrip()
+        self.vox = row[4].rstrip()
+
 
 pp15Multi = 28.72 / 28.1
 pp18Multi = 20.7 / 19.7
@@ -33,44 +34,50 @@ class Results:
             self.up.append(float(survey.up))
             self.cs.append(float(survey.cs))
             self.vox.append(float(survey.vox))
-        recent = sum(self.pp[0:5]) / float(5)
-        medium = sum(self.pp[5:11]) / float(5)
-        old = sum(self.pp[11:26]) / float(15)
-        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+
+        veryrecent = sum(self.pp[0:6]) / float(5)
+        recent = sum(self.pp[6:11]) / float(5)
+        medium = sum(self.pp[11:26]) / float(15)
+        old = sum(self.pp[26:]) / float(len(array) - 25)
+        estimate = (veryrecent * 0.25) + (recent * 0.20) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.55 * pp15Multi) + (0.45 * pp18Multi))
-        self.pp = adjustedestimate
+        self.pp = estimate
         self.ppstring = str(round(self.pp, 2)) + "%"
 
-        recent = sum(self.psoe[0:5]) / float(5)
-        medium = sum(self.psoe[5:11]) / float(5)
-        old = sum(self.psoe[11:26]) / float(15)
-        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        veryrecent = sum(self.psoe[0:6]) / float(5)
+        recent = sum(self.psoe[6:11]) / float(5)
+        medium = sum(self.psoe[11:26]) / float(15)
+        old = sum(self.psoe[26:]) / float(len(array) - 25)
+        estimate = (veryrecent * 0.25) + (recent * 0.20) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.55 * psoe15Multi) + (0.45 * psoe18Multi))
-        self.psoe = adjustedestimate
+        self.psoe = estimate
         self.psoestring = str(round(self.psoe, 2)) + "%"
 
-        recent = sum(self.up[0:5]) / float(5)
-        medium = sum(self.up[5:11]) / float(5)
-        old = sum(self.up[11:26]) / float(15)
-        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        veryrecent = sum(self.up[0:6]) / float(5)
+        recent = sum(self.up[6:11]) / float(5)
+        medium = sum(self.up[11:26]) / float(15)
+        old = sum(self.up[26:]) / float(len(array) - 25)
+        estimate = (veryrecent * 0.25) + (recent * 0.20) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.55 * up15Multi) + (0.45 * up18Multi))
         self.up = adjustedestimate
         self.upstring = str(round(self.up, 2)) + "%"
 
-        recent = sum(self.cs[0:5]) / float(5)
-        medium = sum(self.cs[5:11]) / float(5)
-        old = sum(self.cs[11:26]) / float(15)
-        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        veryrecent = sum(self.cs[0:6]) / float(5)
+        recent = sum(self.cs[6:11]) / float(5)
+        medium = sum(self.cs[11:26]) / float(15)
+        old = sum(self.cs[26:]) / float(len(array) - 25)
+        estimate = (veryrecent * 0.25) + (recent * 0.20) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.55 * cs15Multi) + (0.45 * cs18Multi))
-        self.cs = adjustedestimate
+        self.cs = estimate
         self.csstring = str(round(self.cs, 2)) + "%"
 
-        recent = sum(self.vox[0:5]) / float(5)
-        medium = sum(self.vox[5:11]) / float(5)
-        old = sum(self.vox[11:26]) / float(15)
-        estimate = (recent * 0.45) + (medium * 0.35) + (old * 0.20)
+        veryrecent = sum(self.vox[0:6]) / float(5)
+        recent = sum(self.vox[6:11]) / float(5)
+        medium = sum(self.vox[11:26]) / float(15)
+        old = sum(self.vox[26:]) / float(len(array) - 25)
+        estimate = (veryrecent * 0.25) + (recent * 0.20) + (medium * 0.35) + (old * 0.20)
         adjustedestimate = estimate * ((0.55 * voxMulti1) + (0.45 * voxMulti2))
-        self.vox = adjustedestimate
+        self.vox = estimate
         self.voxstring = str(round(self.vox, 2)) + "%"
 
 class Province:
